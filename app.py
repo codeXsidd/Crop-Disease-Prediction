@@ -35,3 +35,10 @@ if uploaded_file is not None:
 
     st.success(f"Predicted Class Index: {predicted_class}")
     st.info(f"Confidence: {confidence:.2f}") 
+
+import numpy as np
+
+# Fake environmental data (for now)
+env_data = np.array([[25, 60, 30]])  # temp, humidity, soil moisture
+
+prediction = model.predict([img_array, env_data])
