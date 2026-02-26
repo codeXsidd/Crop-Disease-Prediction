@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Crop Disease Prediction</title>
+    <style>
+        body { font-family: Arial; text-align: center; margin-top: 50px; }
+        button { padding: 10px 20px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<h1>🌱 AI Crop Disease Prediction</h1>
+
+<input type="file" id="imageInput">
+<br>
+<button onclick="uploadImage()">Predict</button>
+
+<h2 id="result"></h2>
+
+<script>
+async function uploadImage() {
+    const fileInput = document.getElementById("imageInput");
+    const file = fileInput.files[0];
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("http://127.0.0.1:8000/predict/", {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await response.json();
+    document.getElementById("result").innerText =
+        "Predicted Class: " + data.predicted_class +
+        " | Confidence: " + data.confidence.toFixed(2);
+}
+</script>
+
+</body>
+</html>
