@@ -4,7 +4,6 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import io
-
 app = FastAPI()
 
 # Allow frontend access
