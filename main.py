@@ -17,7 +17,7 @@ app.add_middleware(
 )
 
 # Load model once
-model = tf.keras.models.load_model("model.keras")
+model = tf.keras.models.load_model("crop_disease_model.keras")
 
 @app.get("/")
 def home():
