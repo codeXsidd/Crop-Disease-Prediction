@@ -32,7 +32,26 @@ async def predict(file: UploadFile = File(...)):
     img_array = np.array(image) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
-    prediction = model.predict(img_array)
+    @app.post("/predict/")
+async def predict(file: UploadFile = File(...)):
+    contents = await file.read()
+    image = Image.open(io.BytesIO(contents)).convert("RGB")
+    image = image.resize((224, 224))
+
+    img_array = np.array(image) / 255.0
+    img_array = np.expand_dims(img_array, axis=0)
+
+    env_array = np.array([[30, 60, 40]]) 
+
+    prediction = model.predict([img_array, env_array])
+
+    predicted_class = int(np.argmax(prediction))
+    confidence = float(np.max(prediction))
+
+    return {
+        "predicted_class": predicted_class,
+        "confidence": confidence
+    }
     predicted_class = int(np.argmax(prediction))
     confidence = float(np.max(prediction))
 
