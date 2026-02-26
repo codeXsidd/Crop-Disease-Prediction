@@ -1,4 +1,6 @@
+
+fastapi
+uvicorn
 tensorflow
-streamlit
 numpy
 pillow
